@@ -17,6 +17,5 @@ hyperopt/
 Imbaml/
 
 cloud.yaml
-requirements.txt
-bench.sh
+cloud.sh
 example.py

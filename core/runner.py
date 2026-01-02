@@ -17,7 +17,7 @@ from sklearn.base import BaseEstimator
 
 from core.automl import H2O, AutoML, AutoGluon
 from data.domain import Dataset, Task
-from data.repository import DatasetRepository, BinaryImbalancedDataRepository
+from data.repository import DatasetRepository, BinaryImbalancedDatasetRepository
 from utils.helpers import infer_positive_class_label, split_data_on_train_and_test
 
 
@@ -25,7 +25,7 @@ from utils.helpers import infer_positive_class_label, split_data_on_train_and_te
 class BAML:
     def __init__(
         self,
-        repository = 'imbalanced_binary',
+        repository = 'binary_imbalanced',
         automl = 'ag',
         validation_metric = 'f1',
         timeout = 3600,
@@ -122,7 +122,7 @@ class BAML:
     @repository.setter
     def repository(self, value: str):
         if value == 'binary_imbalanced':
-            self._repository = BinaryImbalancedDataRepository()
+            self._repository = BinaryImbalancedDatasetRepository()
         # elif value == 'openml':
         #     self._repository = OpenMLRepository()
         else:

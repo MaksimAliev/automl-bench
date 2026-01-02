@@ -31,7 +31,7 @@ class DatasetRepository(ABC):
     def datasets(self):
         return self._datasets
 
-class BinaryImbalancedDataRepository(DatasetRepository):
+class BinaryImbalancedDatasetRepository(DatasetRepository):
     def __init__(self):
         super().__init__()
 

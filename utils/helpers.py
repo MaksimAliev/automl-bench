@@ -6,14 +6,16 @@ import pandas as pd
 from loguru import logger
 from imblearn.datasets import make_imbalance
 from sklearn.model_selection import train_test_split as tts
+from typing import cast
 
 
+#TODO: fix typing.
 def make_imbalanced(
-    X_train,
-    y_train,
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
     class_belongings,
     pos_label
-) -> Tuple[Union[pd.DataFrame, pd.Series]]:
+) -> Tuple[pd.DataFrame, pd.Series]:
         is_dataset_initially_imbalanced = True
         number_of_positives = class_belongings.get(pos_label)
         proportion_of_positives = number_of_positives / len(y_train)

@@ -15,7 +15,7 @@ from sklearn.metrics import fbeta_score, balanced_accuracy_score, matthews_corrc
 from autogluon.tabular import TabularDataset as AutoGluonTabularDataset, TabularPredictor as AutoGluonTabularPredictor
 from autogluon.core.metrics import make_scorer
 from loguru import logger
-import ray
+import jdk
 
 from data.domain import Dataset, Task
 
@@ -191,7 +191,7 @@ class AutoGluon(AutoML):
             label=dataset.x.columns[-1],
             eval_metric=metric,
             verbosity=self._verbosity
-        ).fit(ag_dataset, time_limit=timeout)
+        ).fit(ag_dataset, time_limit=timeout, presets=self.preset)
 
         val_scores = predictor.leaderboard().get('score_val')
         if val_scores is None or len(val_scores) == 0:
@@ -214,6 +214,9 @@ class H2O(AutoML):
     ):
         super().__init__(*args, **kwargs)
         self._fitted_model = None
+
+        jre_path = jdk.install('17', jre=True)
+        logger.info(jre_path)
         h2o.init()
     
     @logger.catch
